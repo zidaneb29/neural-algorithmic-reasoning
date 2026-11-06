@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="530" viewBox="0 0 760 530" font-family="sans-serif">
+<rect width="760" height="530" fill="white"/>
+<text x="28" y="34" font-size="21">Endpoint test | Paired MAE changes</text>
+<text x="28" y="60" font-size="14">Weight units, mean ± sample SD across seeds</text>
+<text x="28" y="95" font-size="16">Depth, center training</text>
+<line x1="213" x2="213" y1="109" y2="260" stroke="#aaa"/>
+<text x="209" y="278" font-size="13">0</text>
+<text x="28" y="127" font-size="13">all</text>
+<line x1="195.18279799653533" x2="200.7356782687641" y1="123" y2="123" stroke="#245f90"/>
+<circle cx="197.95923813264972" cy="123" r="4" fill="#245f90"/>
+<text x="28" y="156" font-size="13">1-4</text>
+<line x1="211.00953366084602" x2="226.19791394904374" y1="152" y2="152" stroke="#245f90"/>
+<circle cx="218.60372380494488" cy="152" r="4" fill="#245f90"/>
+<text x="28" y="185" font-size="13">5-8</text>
+<line x1="184.17926182799815" x2="211.73928062529976" y1="181" y2="181" stroke="#245f90"/>
+<circle cx="197.95927122664895" cy="181" r="4" fill="#245f90"/>
+<text x="28" y="214" font-size="13">9-12</text>
+<line x1="183.13781752581062" x2="206.47482098390154" y1="210" y2="210" stroke="#245f90"/>
+<circle cx="194.80631925485608" cy="210" r="4" fill="#245f90"/>
+<text x="28" y="243" font-size="13">13+</text>
+<line x1="184.49421706038447" x2="198.7030967331791" y1="239" y2="239" stroke="#245f90"/>
+<circle cx="191.5986568967818" cy="239" r="4" fill="#245f90"/>
+<text x="398" y="95" font-size="16">Depth, endpoint training</text>
+<line x1="583" x2="583" y1="109" y2="260" stroke="#aaa"/>
+<text x="579" y="278" font-size="13">0</text>
+<text x="398" y="127" font-size="13">all</text>
+<line x1="538.1534074675607" x2="558.6231035566226" y1="123" y2="123" stroke="#245f90"/>
+<circle cx="548.3882555120916" cy="123" r="4" fill="#245f90"/>
+<text x="398" y="156" font-size="13">1-4</text>
+<line x1="566.1187710141647" x2="590.0378987637349" y1="152" y2="152" stroke="#245f90"/>
+<circle cx="578.0783348889498" cy="152" r="4" fill="#245f90"/>
+<text x="398" y="185" font-size="13">5-8</text>
+<line x1="458.0" x2="555.6909315560944" y1="181" y2="181" stroke="#245f90"/>
+<circle cx="506.8454657780472" cy="181" r="4" fill="#245f90"/>
+<text x="398" y="214" font-size="13">9-12</text>
+<line x1="600.2641499059778" x2="611.6816666798866" y1="210" y2="210" stroke="#245f90"/>
+<circle cx="605.9729082929322" cy="210" r="4" fill="#245f90"/>
+<text x="398" y="243" font-size="13">13+</text>
+<line x1="500.04467188554247" x2="563.4722392137327" y1="239" y2="239" stroke="#245f90"/>
+<circle cx="531.7584555496376" cy="239" r="4" fill="#245f90"/>
+<text x="28" y="310" font-size="16">Training source, depth 4</text>
+<line x1="213" x2="213" y1="324" y2="475" stroke="#aaa"/>
+<text x="209" y="493" font-size="13">0</text>
+<text x="28" y="342" font-size="13">all</text>
+<line x1="182.04304764936134" x2="206.07009161174753" y1="338" y2="338" stroke="#245f90"/>
+<circle cx="194.05656963055443" cy="338" r="4" fill="#245f90"/>
+<text x="28" y="371" font-size="13">1-4</text>
+<line x1="202.78590977400742" x2="235.17729600224519" y1="367" y2="367" stroke="#245f90"/>
+<circle cx="218.9816028881263" cy="367" r="4" fill="#245f90"/>
+<text x="28" y="400" font-size="13">5-8</text>
+<line x1="247.99438112863984" x2="316.6260816531797" y1="396" y2="396" stroke="#245f90"/>
+<circle cx="282.3102313909098" cy="396" r="4" fill="#245f90"/>
+<text x="28" y="429" font-size="13">9-12</text>
+<line x1="171.44347025188762" x2="209.30109177155072" y1="425" y2="425" stroke="#245f90"/>
+<circle cx="190.37228101171917" cy="425" r="4" fill="#245f90"/>
+<text x="28" y="458" font-size="13">13+</text>
+<line x1="122.05683917216084" x2="186.42401443342328" y1="454" y2="454" stroke="#245f90"/>
+<circle cx="154.24042680279206" cy="454" r="4" fill="#245f90"/>
+<text x="398" y="310" font-size="16">Training source, depth 8</text>
+<line x1="583" x2="583" y1="324" y2="475" stroke="#aaa"/>
+<text x="579" y="493" font-size="13">0</text>
+<text x="398" y="342" font-size="13">all</text>
+<line x1="534.3080257566734" x2="554.6631482633194" y1="338" y2="338" stroke="#245f90"/>
+<circle cx="544.4855870099964" cy="338" r="4" fill="#245f90"/>
+<text x="398" y="371" font-size="13">1-4</text>
+<line x1="567.5956781305282" x2="589.3167498137342" y1="367" y2="367" stroke="#245f90"/>
+<circle cx="578.4562139721312" cy="367" r="4" fill="#245f90"/>
+<text x="398" y="400" font-size="13">5-8</text>
+<line x1="579.4310654060525" x2="602.9617864785635" y1="396" y2="396" stroke="#245f90"/>
+<circle cx="591.196425942308" cy="396" r="4" fill="#245f90"/>
+<text x="398" y="429" font-size="13">9-12</text>
+<line x1="590.1506284537757" x2="612.9271116458149" y1="425" y2="425" stroke="#245f90"/>
+<circle cx="601.5388700497953" cy="425" r="4" fill="#245f90"/>
+<text x="398" y="458" font-size="13">13+</text>
+<line x1="475.6735350236026" x2="513.1269158876931" y1="454" y2="454" stroke="#245f90"/>
+<circle cx="494.4002254556479" cy="454" r="4" fill="#245f90"/>
+</svg>

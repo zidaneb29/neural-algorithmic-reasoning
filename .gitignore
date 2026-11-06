@@ -1,0 +1,41 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.ruff_cache/
+.mypy_cache/
+*.py[cod]
+/build/
+/dist/
+
+# Generated data and experiment outputs
+/data/generated/
+/datasets/generated/
+/checkpoints/
+/runs/
+/results/generated/
+/artifacts/
+*.ckpt
+*.pt
+*.pth
+
+# LaTeX build products
+/paper/*.aux
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.log
+/paper/*.out
+/paper/main.pdf
+/paper/*.synctex.gz
+/paper/*.toc
+
+# Fresh experiment replays
+/replay/
+
+# Local publication and environment files
+/AGENTS.md
+/GITHUB_PUBLICATION_PLAN.md
+.env
+.env.*
+Thumbs.db
+.DS_Store
