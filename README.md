@@ -14,11 +14,11 @@ How do graph size, topology, and message-passing depth affect predictions on uns
 - On 24-vertex paths, depth eight lowered overall mean error on both probes under both training regimes, with close parameter and dense-operation counts and higher measured runtime. Endpoint training improved endpoint MAE and worsened center MAE.
 - Residual updates gave no consistent benefit under the tested protocol.
 
-See [Phase 3 results](PHASE3_RESULTS.md), [Phase 4 theory](PHASE4_THEORY.md) and [Phase 4 results](PHASE4_RESULTS.md).
+See [Phase 3 results](docs/size-and-topology-results.md), [Phase 4 theory](docs/message-passing-locality.md) and [Phase 4 results](docs/path-validation-results.md).
 
 ## Theoretical locality result
 
-A synchronous $k$-round message-passing model with a nodewise readout and a source indicator as its only source-dependent input gives the same root prediction for two sources outside the root's $k$-hop neighborhood on a fixed graph. On a unit-weight path, choosing sources at hops $k+1$ and $k+2$ makes their exact distances differ by one. The shared prediction must incur at least 0.5 weight units of absolute error on one query, for any model parameters. See the [proof and assumptions](PHASE4_THEORY.md).
+A synchronous $k$-round message-passing model with a nodewise readout and a source indicator as its only source-dependent input gives the same root prediction for two sources outside the root's $k$-hop neighborhood on a fixed graph. On a unit-weight path, choosing sources at hops $k+1$ and $k+2$ makes their exact distances differ by one. The shared prediction must incur at least 0.5 weight units of absolute error on one query, for any model parameters. See the [proof and assumptions](docs/message-passing-locality.md).
 
 ## Visual results
 
@@ -34,7 +34,7 @@ The plot shows mean paired MAE changes and sample standard deviations across fiv
 | `tests/` | Automated graph, baseline, model, and experiment checks |
 | `scripts/` | Experiment summarizers and paper data generator |
 | `paper/` | Reviewed PDF, LaTeX source, generated tables and plots, and archive checksums |
-| `PHASE3_RESULTS.md`, `PHASE4_RESULTS.md`, `PHASE4_THEORY.md` | Detailed results and locality proof |
+| `docs/` | Pilot audit, detailed experiment results, and locality proof |
 
 ## Installation and tests
 

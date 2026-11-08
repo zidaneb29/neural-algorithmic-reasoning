@@ -26,4 +26,4 @@
 - Decide whether to distribute the original evidence bundle separately. The source release can use the included fragments and replay instructions.
 - Authorize any future push or publication explicitly. This review left the repository local.
 
-This is a historical review. See the latest [project status](../PROJECT_STATUS.md) for the final Overleaf review and current publication preparation.
+This is a historical review. See the [paper build and verification notes](README.md) for the final Overleaf review.

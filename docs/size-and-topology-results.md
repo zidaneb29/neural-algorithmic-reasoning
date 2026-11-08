@@ -1,6 +1,6 @@
 # Phase 3 generalization experiments
 
-[Phase 2 audit](PHASE3_AUDIT.md)
+[Phase 2 audit](phase2-pilot-audit.md)
 
 ## Hypotheses and design
 
@@ -11,6 +11,34 @@ Train and select models on separate connected Erdős–Rényi graphs at 6 and 8 
 Each replicate pairs standard and residual models at depths 2, 4 and 8. At each depth the architecture pair shares the initial parameters and graph order. Across depths the encoder and shared prefix layers start identically for a given seed, while readout initialization depends on how many layers precede it. Each fit uses width 32, Adam at 0.001, one update per graph, and scaled non-source MAE. Parameter counts are 10,657, 21,217 and 42,337. The number of updates is matched, while message-passing operations and capacity grow with depth. Use the earliest minimum graph-macro validation MAE to select the epoch. Baselines predict zero or the non-source node-pooled mean of training labels.
 
 For overall scores, average non-source node errors within each graph and weight all graphs equally, including when averaging per-graph RMSE and per-graph normalized MAE. Within a hop or target-distance bin, pool nodes inside a replicate. Average replicate-level summaries equally across available replicates. Differences are paired within replicate and sample SD includes both graph-draw and training variation. Nodes within the same graph are dependent. Rare bins may have fewer than five contributing replicates. The training curve averages loss at each update before the optimizer step.
+
+## Planned and realized protocol
+
+### Original hypotheses and comparisons
+
+| Question | Testable hypothesis | Comparison |
+| --- | --- | --- |
+| RQ1 Size | Graph-level normalized MAE increases on larger graphs. | Train on small graphs and compare ID test error to size-only OOD error within family. |
+| RQ2 Structure | At matched sizes and similar edge counts, families with a larger fraction of nodes beyond the receptive field have higher normalized MAE. | Train on one family and test on held-out families. Report residual differences in density, degree, and diameter. |
+| RQ3 Depth | Increasing depth reduces error more for nodes newly within reach than for nodes already within reach. | Compare the same graph-source pairs at several depths and stratify by hop distance. |
+| RQ4 Residuals | Residual connections reduce validation loss at a fixed update budget and reduce OOD normalized MAE. | Pair data and initialization seeds across models. Compare training curves and held-out error separately. |
+
+### Original protocol before training
+
+Start with small connected random graphs and deterministic path, cycle, and grid probes. Fix the weight law across splits. Rejection sampling changes the topology distribution to connected draws. For size shifts, preselect a density policy such as approximately fixed expected degree and record the realized degree distribution, since conditioning can change it. Compare a size-only shift, a family-only shift at matched sizes, and optionally a combined shift. Family comparisons are observational with respect to diameter and degree.
+
+Create disjoint graph-level train, validation, and test manifests with recorded seeds and settings. Keep all sources, relabelings, and augmentations of a weighted instance in one split. Audit duplicate weighted instances, including relabelings where practical, before training. Paths, cycles, and fixed-shape grids have a single topology for a given size and shape. Repeated samples at those settings test new weights and sources on the same topology. Reserve shapes or families when testing transfer to unseen topologies.
+
+Report per-graph non-source MAE and RMSE and macro-average across graphs. Also report per-graph normalized MAE, defined as the sum of absolute errors divided by the sum of true non-source distances. Stratify by unweighted hops and weighted target distance and report bucket counts. Record graph size, edge count, unweighted diameter, degree distribution, weight law, depth, parameter count, and data and training seeds. Use validation alone for model selection. Report paired seed-level differences over at least five seeds and their variability. Treat graphs and training runs as experimental units for uncertainty, since nodes from the same graph are dependent.
+
+The plan called for fixing sample sizes, split manifests, size bands, density policy, depth and width settings, aggregation and edge encoding, loss, optimizer, and compute budget and comparing equal-width architectures with identical trainable components and a parameter-free residual addition. Spectral analysis can follow the initial comparisons. Oversmoothing and oversquashing would require separate diagnostics.
+
+### Planned versus realized comparisons
+
+- **Size and topology.** The run tested within-family size shifts and matched-size family shifts, with larger structured cells combining both shifts relative to training. Edge counts were measured and differ across families. Diameter, degree, hop coverage, and target scale also vary, so the family comparisons are observational.
+- **Depth.** The comparison stratified the same graph-source observations by hops and matched update counts. Increasing depth also increased parameter count and work per update.
+- **Residuals.** Standard and residual models were paired by data and initialization at each depth. The report separates validation and held-out errors and retains paired variability.
+- **Replication.** The Phase 2 pilot shared one graph draw across five training seeds. The Phase 3 main study used five paired data and training replicates. Spectral analysis, oversmoothing, and oversquashing were outside the realized comparisons.
 
 ## Pilot and locality check
 

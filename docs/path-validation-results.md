@@ -14,17 +14,19 @@ All test MAEs below use original weight units. Overall MAE averages graphs equal
 
 ## Reproduction and artifacts
 
-Run from the project root in PowerShell with the training dependencies installed.
+Run from the repository root after [installing the training dependencies](../README.md#installation-and-tests). Use an empty replay directory and fresh output filenames.
 
-```powershell
-$env:PYTHONPATH = 'src'
-.venv/Scripts/python.exe -m gnn_generalization.phase4 runs/phase4-pilot.jsonl --pilot
-.venv/Scripts/python.exe -m gnn_generalization.phase4 runs/phase4-main.jsonl
-.venv/Scripts/python.exe scripts/summarize_phase4.py runs/phase4-main.jsonl
-.venv/Scripts/python.exe -m pytest -q
+```sh
+mkdir replay
+python -m gnn_generalization.phase4 replay/phase4-pilot.jsonl --pilot
+python -m gnn_generalization.phase4 replay/phase4-main.jsonl
+python scripts/summarize_phase4.py replay/phase4-main.jsonl
+python -m pytest -q
 ```
 
 Use fresh output names when reproducing existing runs. The JSONL files contain versions, graph seeds and ordered weights, curves, per-node predictions, and locality pairs. The optional spectral investigation was skipped to keep the study focused on the source-placement and depth controls.
+
+The following original outputs are in the private experiment archive.
 
 - Pilot records (`runs/phase4-pilot.jsonl`), pilot log (`runs/phase4-pilot.log`), and initial import failure (`runs/phase4-pilot-import-failure.log`)
 - Main records (`runs/phase4-main.jsonl`), main log (`runs/phase4-main.log`), and paired numerical summary (`runs/phase4-main-summary.log`)
@@ -47,7 +49,7 @@ All 20 main fits completed and passed the exact fixed-graph locality check. Five
 | 13+ | −4.02 ± 1.34 | −9.64 ± 5.96 | −11.05 ± 6.05 | −16.66 ± 3.52 |
 | All | −2.83 ± 0.52 | −6.51 ± 1.92 | −3.56 ± 2.26 | −7.24 ± 1.91 |
 
-Local figure `runs/phase4-main.svg`. Paired MAE changes by hop band on endpoint queries. Whiskers show one sample SD.
+[Published figure](../paper/figures/phase4-main.svg) from the archived `runs/phase4-main.svg`. Paired MAE changes by hop band on endpoint queries. Whiskers show one sample SD.
 
 Depth 8 had lower overall mean MAE under both training regimes and on both probes with the near-matched parameter and dense-operation budgets. The largest depth gain after endpoint training occurred in the newly reachable 5–8 band, but the 13+ band improved while the 9–12 band worsened. Visibility, changed structural context, width, and different fitted parameters all vary in the depth comparison. The experiment does not estimate a causal effect of source visibility on test MAE.
 
