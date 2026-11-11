@@ -10,7 +10,8 @@
 \input{data/family-rows.tex}
 \input{data/path-rows.tex}
 \title{Neural Algorithmic Reasoning:\\ Generalization and Theoretical Limitations of Graph Neural Networks}
-\author{Independent undergraduate research project}
+\author{Zidane Boussofi}
+\hypersetup{pdfauthor={Zidane Boussofi}}
 \date{}
 \begin{document}
 \maketitle
@@ -19,7 +20,7 @@ We study weighted single-source shortest-path regression with synchronous graph 
 \end{abstract}
 
 \section{Introduction and motivation}
-Classical shortest-path algorithms apply to graphs of arbitrary size. A neural regressor can accept the same range of input sizes while its prediction rule has a fixed propagation depth. This distinction motivates four questions: how error changes with size within a family, how it varies across families at matched size, whether extra rounds help newly reachable nodes, and whether residual updates improve transfer under a fixed training budget. We combine synthetic experiments with a parameter-independent source intervention. Exact distance labels make regression error measurable. Because supervision uses final distances, the experiments leave open whether the models execute intermediate steps of Dijkstra or Bellman--Ford. The locality analysis separately characterizes which queries the architecture can distinguish.
+A fixed-depth graph neural network can accept graphs of arbitrary size, but each prediction depends on a bounded number of propagation rounds. On synthetic graphs, we ask how error changes with size within a family and across families at matched size, whether extra rounds help newly reachable nodes, and whether residual updates improve transfer under a fixed training budget. Final-distance supervision leaves open whether the models execute intermediate steps of Dijkstra or Bellman--Ford. A source-swap analysis characterizes which queries the architecture can distinguish for any parameters.
 
 \section{Related work}
 Gilmer et al.\ formalized a common message-passing framework \cite{gilmer}. Xu et al.\ related neighborhood aggregation expressivity to the Weisfeiler--Lehman test and identified limitations of common aggregators \cite{xu}. Our locality proposition uses isomorphic attributed balls as a sufficient condition for equality. It makes no injectivity assumption about aggregation. Yehudai et al.\ studied size generalization when local structure changes with graph size \cite{yehudai}. Our connected random-graph series also changes distances and coverage as size grows.
@@ -126,9 +127,9 @@ The midpoint attains both lower bounds. Take a unit-weight path on vertices \(0,
 The bound concerns the constructed pair. If those observations are two of \(N\) equally weighted observations, their contribution to pooled MAE is at least \(|a-b|/N\). For normalized error on just the pair, the lower bound is \(|a-b|/(a+b)\). The earliest possible influence of the source flag is its hop distance, but even source visibility can be insufficient. On a triangle with prediction vertex \(v\), source \(s\) and third vertex \(u\), set \(w_{vs}=10\) and \(w_{vu}=1\). Increasing \(w_{us}\) from 1 to 9 changes the target from 2 to 10 while leaving the messages into \(v\) in round one unchanged.
 
 \section{Targeted experimental validation}
-All 30 Phase 3 main fits and all 20 Phase 4 main fits gave exactly equal CPU predictions on their constructed unit-path pairs. This verifies the implementation for those inputs. The bound itself follows for all parameter settings from the proof. The independent path test uses random weights and measures a different outcome.
+All 30 Phase 3 main fits and all 20 Phase 4 main fits gave exactly equal CPU predictions on their constructed unit-path pairs, verifying the implementation on those inputs. The held-out path test measures regression error on randomly weighted paths.
 
-Depth eight reduced overall mean MAE under each training regime on both probes (Table~\ref{tab:path}). Parameter counts were 21,217 and 22,150, and forward dense multiply-accumulate counts were 679,168 and 703,616 per query. Median fit-and-evaluation times were 5.83 and 9.15 seconds. The comparison is close in parameter count and the dense-operation proxy, with different widths and elapsed computation. Five fits selected the final epoch.
+Depth eight reduced overall mean MAE under each training regime on both probes (Table~\ref{tab:path}). The four- and eight-round models had 21,217 and 22,150 parameters and required 679,168 and 703,616 forward dense multiply-accumulates per query, respectively. Median fit-and-evaluation times were 5.83 and 9.15 seconds. Five fits selected the final epoch.
 
 \begin{table}[htbp]
 \centering
@@ -161,15 +162,15 @@ grid=major,legend pos=north east]
 Endpoint training reduced endpoint test error at hops 13--23 by \(11.05\pm6.05\) at depth four and \(16.66\pm3.52\) at depth eight (Figure~\ref{fig:path}). At both depths those nodes are outside source reach. Endpoint training increased overall center-probe MAE by \(5.96\pm2.24\) and \(3.81\pm0.55\), respectively. With endpoint training fixed, depth eight helped most in the newly reachable 5--8 band, helped at 13--23, and worsened mean error at 9--12. Paired differences are computed before rounding.
 
 \section{Discussion}
-The mathematical obstruction is an input equivalence: two targets differ while the model receives indistinguishable local source information. Empirical MAE summarizes many other inputs, including queries the model can distinguish. The observed gains beyond eight hops therefore coexist with the obstruction. Different fitted parameters and extra structural context can change predictions there. On paths, endpoint training shifts the hop and label distributions and changes the prior over source positions. A change in typical predictions conditional on local structure is a plausible mechanism. The intervention varies these factors jointly.
+The source-swap bound applies to indistinguishable queries on a fixed graph. Empirical MAE also includes distinguishable queries. Beyond source reach, different fitted parameters and additional structural context can still change predictions. Endpoint training jointly shifts the hop and label distributions and the prior over source positions. These shifts could change typical predictions conditional on local structure.
 
-The size hypothesis is supported at the largest size by both raw and normalized MAE. The family comparison documents transfer differences without isolating their causes. The hop-band results provide mixed support for a gain specific to newly reachable nodes. Residual updates have no consistent advantage in the tested regime. In particular, the small depth-eight validation contrast does not predict the direction of the mean large-graph contrast. These conclusions concern the tested additive skip, architectures and optimizer budgets.
+Both raw and normalized MAE support the size hypothesis at the largest size. The family comparison leaves the causes of transfer differences unresolved. Hop-band results give mixed support for a gain specific to newly reachable nodes. The small depth-eight validation contrast fails to predict the direction of the mean large-graph contrast. The tested additive skip shows no consistent benefit across the architectures and optimizer budgets studied.
 
 \section{Limitations and future work}
 Five paired replicates support descriptive summaries. The joint data and training seeds do not partition uncertainty, and node observations within a graph are dependent. Structured probes repeat shapes, the controlled path study uses one topology, and random draws are conditioned on connectivity. Width, runtime and convergence remain unresolved in the depth comparison. Larger targets and shifted source distributions can interact with extrapolation. Future controlled studies could independently vary data and training seeds, match hop and weighted-distance support across families, and compare training budgets at equal wall time. Trace supervision and shared recurrent rounds would support a separate investigation of algorithm execution. Representation and sensitivity diagnostics would be required to test oversmoothing or oversquashing.
 
 \section{Conclusion}
-Fixed-depth local message passing cannot recover arbitrary weighted distances from a source flag alone. An explicit source-swap pair makes the obstruction measurable without assumptions about training. In the archived experiments, held-out accuracy varied with depth and training-source placement even outside the source's receptive field. The experiments identify where these changes occur and the controlled path comparison narrows the budget differences, while the mathematical result specifies precisely where a source intervention cannot affect the output.
+Fixed-depth local message passing cannot recover arbitrary weighted distances from a source flag alone. Held-out accuracy can still vary with depth and training-source placement beyond the model's source reach.
 
 \begin{thebibliography}{9}
 \setlength{\itemsep}{2pt}

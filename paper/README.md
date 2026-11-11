@@ -1,5 +1,7 @@
 # Paper build and verification
 
+Zidane Boussofi is the author. The checked-in PDF was rebuilt and visually reviewed in Overleaf. [Research paper (PDF)](neural-algorithmic-reasoning.pdf)
+
 [main.tex](main.tex) includes three tables and two figures from the generated [data fragments](data/). Table row definitions load in the preamble so the file-input hooks run outside the table alignments. Build from the paper directory with TeX Live or MiKTeX including AMS-LaTeX, geometry, booktabs, flafter, placeins, hyperref, TikZ and PGFPlots 1.18 or newer.
 
 ~~~sh
@@ -7,7 +9,9 @@ cd paper
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 ~~~
 
-Alternatively, run `pdflatex -interaction=nonstopmode -halt-on-error main.tex` twice there to resolve cross-references. After the build, inspect `main.log` for undefined references or citations, rerun notices and overfull or underfull boxes. In the PDF, check the metric displays, the placement of Figures 1 and 2 and all three tables, the continuity of the proofs, and the reference links. The final formatting revision was compiled and visually reviewed in Overleaf. The [reviewed paper PDF](neural-algorithmic-reasoning.pdf) is included. For an Overleaf rebuild, upload main.tex and the data directory together at the project root, select main.tex as the main document, and compile with pdfLaTeX.
+Alternatively, run `pdflatex -interaction=nonstopmode -halt-on-error main.tex` twice to resolve cross-references. In Overleaf, upload `main.tex` and the `data/` directory together at the project root, select `main.tex` as the main document, and compile with pdfLaTeX.
+
+Inspect the compiler log for unresolved references or citations, rerun notices and layout warnings. In the PDF, check the byline, metric displays, both figures, all three tables, proof continuity, pagination and reference links. After review, save the build as `neural-algorithmic-reasoning.pdf` in this directory.
 
 From the repository root, verify the original local archive and regenerate the fragments into a scratch directory for comparison with `paper/data`.
 
