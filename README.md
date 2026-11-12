@@ -1,6 +1,6 @@
 # Neural Algorithmic Reasoning
 
-How well do graph neural networks predict weighted shortest-path distances on larger graphs or unfamiliar topologies? In this independent undergraduate research project, Zidane Boussofi tests generalization on synthetic graphs and uses a source-swap proof to show what fixed-depth message passing can distinguish.
+How well do graph neural networks predict weighted shortest-path distances on larger graphs or unfamiliar topologies? This independent undergraduate research project investigates generalization on synthetic graphs and uses a source-swap proof to establish a limitation of fixed-depth message passing.
 
 [Research paper (PDF)](paper/neural-algorithmic-reasoning.pdf) · [LaTeX source](paper/main.tex) · [Build instructions](paper/README.md)
 
